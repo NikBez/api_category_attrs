@@ -4,10 +4,10 @@ from api import queries
 from clickhouse.connect import db
 
 
-def get_categories_attrs(category_id: str, product_id: str):
+async def get_categories_attrs(category_id: str, product_id: str):
     query = queries.get_product_analitic_query(category_id, product_id)
-    session = db.connect()
-    response = session.execute(query)
+    response = await db.execute(query)
+
     if not response:
         raise HTTPException(404, detail='Нет данных по заданным параметрам')
     annotation = response[0][4]

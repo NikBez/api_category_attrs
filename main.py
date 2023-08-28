@@ -8,5 +8,5 @@ app = FastAPI()
 
 @app.post('/', response_model=AttrsParam)
 async def get_categories_attrs(category_id: str, product_id: str):
-    response = services.get_categories_attrs(category_id, product_id)
+    response = await services.get_categories_attrs(category_id, product_id)
     return response

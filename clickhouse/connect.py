@@ -1,21 +1,21 @@
-from clickhouse_driver import Client
-
+from aioch import Client
 from config.config import Settings
+from fastapi.exceptions import HTTPException
 
 
 class ClickHouseConnector:
-    def connect(self):
+    async def execute(self, query):
         try:
-            with Client(
+            client = Client(
                     host=Settings.CLICKHOUSE_HOST,
                     port=Settings.CLICKHOUSE_PORT,
                     database=Settings.CLICKHOUSE_DB,
                     user=Settings.CLICKHOUSE_USER,
                     password=Settings.CLICKHOUSE_PASSWORD
-            ) as client:
-                return client
+            )
+            response = await client.execute(query)
+            return response
         except Exception as e:
-            print(f"Error connecting to ClickHouse: {e}")
-            return None
+            raise HTTPException(401, detail=f"Error while connecting to ClickHouse: {e}")
 
 db = ClickHouseConnector()
