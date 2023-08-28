@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "api-category-attrs"
+version = "0.1.0"
+description = ""
+authors = ["Nik Bezmaternykh <nikitabit@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "api_category_attrs"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["all"], version = "^0.103.0"}
+clickhouse-driver = "^0.2.6"
+environs = "^9.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
